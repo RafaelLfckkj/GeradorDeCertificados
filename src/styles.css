@@ -1,3 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "tailwindcss";
+
+.TextoAtivo {
+  @apply text-[#3B5AC2];
+}
