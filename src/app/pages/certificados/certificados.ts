@@ -9,4 +9,5 @@ import { ItemCertificado } from "../../components/item-certificado/item-certific
 })
 export class Certificados {
 
+
 }
