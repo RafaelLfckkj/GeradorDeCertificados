@@ -1,6 +1,8 @@
-<button
+<button [ngStyle]="disabled ? { opacity: '50%', cursor: 'not-allowed' } : {}"
   class="h-10 py-2.5 px-4 rounded-md text-[1rem] text-white bg-[#1A2856] cursor-pointer font-semibold hover:opacity-90 duration-150 gap-2 flex items-center"
 >
-  <i class="ph ph-plus text-[1.25rem]"></i>
-  Botão Secundario
+  @if (phClass) {
+    <i class="{{ phClass }} text-[1.25rem]"></i>
+  }
+  {{ textoBotao }}
 </button>

@@ -1,5 +1,5 @@
-<button
+<button [ngStyle]="disabled ? { opacity: '50%', cursor: 'not-allowed' } : {}"
   class="h-12 py-3 px-4 rounded-md text-[1rem] text-white bg-gradient-to-r from-[#1A2856] to-[#334EA9] cursor-pointer hover:opacity-90 duration-150 w-full font-semibold"
 >
-  Botão Primário
+  {{ textoBotao }}
 </button>

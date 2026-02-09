@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center">
+<form #form="ngForm" novalidate class="flex flex-col items-center">
   <div class="text-center h-15 gap-1 mb-8">
     <h1 class="font-bold mb-1 text-2xl leading-9 tracking-normal text-center">
       Geração de certificado
@@ -13,56 +13,72 @@
       Novo Certificado
     </h2>
     <div class="mb-4">
-      <label class="block text-sm font-medium text-[#1A2856] mb-1 leading-5 tracking-normal">Nome:</label>
+      <label class="block text-sm font-medium text-[#1A2856] mb-1 leading-5 tracking-normal"
+        >Nome:</label
+      >
       <input
+        #nomeRef="ngModel"
+        maxlength="150"
+        required
+        id="nome"
+        name="nome"
+        [(ngModel)]="nome"
         type="text"
         class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#3B5AC2]"
         placeholder="Nome do aluno..."
       />
-      <div class="flex items-center gap-1 text-[#D71D1D] mt-2">
-        <i class="ph ph-warning-circle "></i>
-        <p class="font-normal text-[12px] tracking-normal align-middle">Error message</p>
-      </div>
+
+      @if (nomeRef.invalid && nomeRef.touched) {
+        <div class="flex items-center gap-1 text-[#D71D1D] mt-2">
+          <i class="ph ph-warning-circle"></i>
+          <p class="font-normal text-[12px] tracking-normal align-middle">Nome é obrigatório</p>
+        </div>
+      }
     </div>
 
     <div class="mb-4 flex items-end">
       <div class="grow mr-2">
-        <label class="block text-sm font-medium text-[#1A2856] mb-1 leading-5 tracking-normal">Atividade:</label>
+        <label class="block text-sm font-medium text-[#1A2856] mb-1 leading-5 tracking-normal"
+          >Atividade:</label
+        >
         <input
+          #atividadeRef="ngModel"
+          maxlength="50"
+          required
+          name="atividade"
+          id="atividade"
+          [(ngModel)]="atividade"
           type="text"
           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#3B5AC2]"
           placeholder="Atividade exercida..."
         />
+
       </div>
-      <app-secondary-button></app-secondary-button>
+      <app-secondary-button textoBotao="Adicionar" phClass="ph ph-plus" [disabled]="atividade.length == 0"
+
+      ></app-secondary-button>
     </div>
     <div class="mb-8">
-       <label class="block text-sm font-medium text-[#1A2856] mb-1 leading-5 tracking-normal">Lista de atividades:</label>
+      <label class="block text-sm font-medium text-[#1A2856] mb-1 leading-5 tracking-normal"
+        >Lista de atividades:</label
+      >
       <div class="w-full border border-[#E2E8F0] rounded-lg p-4 gap-3">
-        <div class="flex justify-between items-center">
-            <span class="">Configuração com o Angular CLI</span>
-              <div class="p-[5.75px]">
-              <i class="ph-bold ph-x text-[#E95F5F] text-[12.5px] cursor-pointer hover:bg-[#E2E8F9] rounded"></i>
+        @for (atividade of atividades; track $index) {
+          <div class="flex justify-between items-center">
+            <span class="">{{ atividade }}</span>
+            <div class="p-[5.75px]">
+              <i
+                class="ph-bold ph-x text-[#E95F5F] text-[12.5px] cursor-pointer hover:bg-[#E2E8F9] rounded"
+              ></i>
             </div>
-        </div>
-        <hr class="mt-3 mb-3 mr-0 ml-0 border-t border-[#E2E8F0] ">
-        <div class="flex justify-between items-center">
-            <span class="">Configuração com o Angular CLI</span>
-              <div class="p-[5.75px]">
-              <i class="ph-bold ph-x text-[#E95F5F] text-[12.5px] cursor-pointer hover:bg-[#E2E8F9] rounded"></i>
-            </div>
-        </div>
-        <hr class="mt-3 mb-3 mr-0 ml-0 border-t border-[#E2E8F0] ">
-        <div class="flex justify-between items-center">
-            <span class="">Configuração com o Angular CLI</span>
-              <div class="p-[5.75px]">
-              <i class="ph-bold ph-x text-[#E95F5F] text-[12.5px] cursor-pointer hover:bg-[#E2E8F9] rounded"></i>
-            </div>
-        </div>
-        <hr class="mt-3 mb-3 mr-0 ml-0 border-t border-[#E2E8F0] ">
+          </div>
+
+          @if ($index + 1 != atividade.length) {
+            <hr class="mt-3 mb-3 mr-0 ml-0 border-t border-[#E2E8F0]" />
+          }
+        }
       </div>
     </div>
-    <app-primary-button></app-primary-button>
-
+    <app-primary-button [disabled]="!formValido()" textoBotao="Gerar Certificado"></app-primary-button>
   </div>
-</div>
+</form>
