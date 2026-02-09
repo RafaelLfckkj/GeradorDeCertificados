@@ -6,13 +6,14 @@ import { CommonModule } from '@angular/common';
 
 
 import { BaseUi } from "./components/base-ui/base-ui";
+import { CertificadoComponent } from "./pages/certificadoComponent/certificadoComponent";
 
 
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Navbar, CommonModule, BaseUi],
+  imports: [RouterOutlet, Navbar, CommonModule, BaseUi, CertificadoComponent],
   templateUrl: './app.html',
 
 })

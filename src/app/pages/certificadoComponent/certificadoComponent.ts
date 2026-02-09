@@ -5,8 +5,8 @@ import { RouterLink } from "@angular/router";
 @Component({
   selector: 'app-certificado',
   imports: [SecondaryButton, RouterLink],
-  templateUrl: './certificado.html',
+  templateUrl: './certificadoComponent.html',
 })
-export class Certificado {
+export class CertificadoComponent {
 
 }
