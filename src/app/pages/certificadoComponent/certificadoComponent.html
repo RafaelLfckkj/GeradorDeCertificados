@@ -4,10 +4,11 @@
       <i class="ph ph-arrow-left text-[20px]"></i>
       <p class="font-semibold text-[14px] leading-5 tracking-normal align-middle">Voltar</p>
     </div>
-    <app-secondary-button></app-secondary-button>
+    <app-secondary-button (click)="donwloadCertificado()" phClass="ph ph-download-simple" textoBotao="Download"></app-secondary-button>
   </div>
 
-  <div
+  @if (certificado) {
+    <div #certificadoContainer
     class="mt-8 bg-[url('/certificate/Certificate_BG.png')] bg-cover rounded-xl bg-no-repeat bg-center w-200 h-137.5 flex justify-center items-center relative"
   >
     <img
@@ -26,17 +27,16 @@
           </h1>
           <p class="text-center font-normal text-[12px] leading-[160%] tracking-normal  text-[#121621]">Este certificado comprova que</p>
         </div>
-        <p class="text-center font-bold text-[3.25rem] leading-20 tracking-normal text-[#3B5AC2] font-display">Rafael De Oliveira</p>
+        <p class="text-center font-bold text-[3.25rem] leading-20 tracking-normal text-[#3B5AC2] font-display">{{certificado.nome}}</p>
         <div class="font-normal text-[12px] leading-[160%] tracking-normal text-center w-[25.8562rem] text-[#121621]">
           <p class="mb-2">Concluiu com sucesso as seguintes atividades:</p>
           <p class="font-normal text-[14px] leading-[160%] tracking-normal text-center">
-            Introdução ao Angular, Configuração com Angular CLI, Criação de componentes
-            reutilizáveis, Manipulação de dados, Implementação de data binding, Criação de rotas com
-            Angular Router, Consumo de APIs REST
+            {{certificado.atividades.join(', ')}}
           </p>
         </div>
       </div>
-      <p class="text-[#121621] font-bold text-[11.2px] leading-[160%] tracking-normal text-center ">Emitido em 08/02/2026</p>
+      <p class="text-[#121621] font-bold text-[11.2px] leading-[160%] tracking-normal text-center ">Emitido em {{certificado.dataEmiss}}</p>
     </div>
   </div>
+  }
 </div>
