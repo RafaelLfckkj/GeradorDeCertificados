@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Navbar } from "./components/navbar/navbar";
 import { CommonModule } from '@angular/common';
@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 
 import { BaseUi } from "./components/base-ui/base-ui";
 import { CertificadoComponent } from "./pages/certificadoComponent/certificadoComponent";
+import { CertificadoService } from './services/certificado.service';
 
 
 
@@ -17,7 +18,15 @@ import { CertificadoComponent } from "./pages/certificadoComponent/certificadoCo
   templateUrl: './app.html',
 
 })
-export class App {
+export class App implements OnInit {
   protected readonly title = signal('GeradorDeCertificados');
   exibirNavbar : boolean = true;
+
+  constructor(private certificadoService: CertificadoService) {}
+
+  ngOnInit(): void {
+    const certificados = localStorage.getItem('certificados');
+    this.certificadoService.certificados = certificados ? JSON.parse(certificados) : [];
+    console.log(this.certificadoService.certificados);
+  }
 }

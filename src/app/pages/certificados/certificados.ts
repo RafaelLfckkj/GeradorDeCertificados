@@ -1,14 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SecondaryButton } from "../../components/secondary-button/secondary-button";
-import { ItemCertificado } from "../../components/item-certificado/item-certificado";
+
 import { RouterLink } from "@angular/router";
+import { CertificadoService } from '../../services/certificado.service';
+import { ItemCertificado } from '../../components/item-certificado/item-certificado';
+import { Certificado } from '../../Interface/certificado';
 
 @Component({
   selector: 'app-certificados',
-  imports: [ItemCertificado, SecondaryButton, RouterLink],
+  imports: [SecondaryButton, RouterLink, ItemCertificado],
   templateUrl: './certificados.html',
 })
-export class Certificados {
+export class Certificados implements OnInit {
+
+  certificados: Certificado[] = [];
+
+  constructor(private certificadoService: CertificadoService) { }
+
+  ngOnInit(): void {
+    this.certificados = this.certificadoService.certificados;
+    console.log(this.certificados);
+  }
+
 
 
 }
